@@ -1,0 +1,162 @@
+:root {
+  --bg: #0a0a0f;
+  --sidebar: #111118;
+  --panel: #0d0d18;
+  --editor: #0a0a14;
+  --border: #1a1a28;
+  --border-strong: #1e1e30;
+  --active: #1e1e30;
+  --active-border: #4444aa;
+  --text: #e2e2e8;
+  --text-soft: #c8c8e0;
+  --text-active: #c0c0e8;
+  --text-muted: #66667a;
+  --text-faint: #44445a;
+  --accent: #7c3aed;
+  --accent-dark: #5b21b6;
+  --code-font: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, "Segoe UI", sans-serif;
+}
+
+button { font-family: inherit; cursor: pointer; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid #a855f7; outline-offset: 2px; }
+
+.app { display: flex; height: 100vh; overflow: hidden; }
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 240px; flex-shrink: 0; background: var(--sidebar); border-right: 1px solid var(--border-strong);
+  padding: 16px 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
+}
+.brand { display: flex; align-items: center; gap: 10px; padding: 4px 6px 12px; border-bottom: 1px solid var(--border-strong); margin-bottom: 6px; }
+.brand-logo {
+  width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; font-size: 14px; font-weight: 800;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+}
+.brand-name { font-size: 15px; font-weight: 700; color: #fff; }
+.brand-sub { font-size: 10px; color: var(--text-faint); }
+
+.progress { padding: 6px 6px 10px; border-bottom: 1px solid #1a1a2e; margin-bottom: 4px; }
+.caption { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.progress-track { background: #1a1a28; border-radius: 6px; height: 6px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #a855f7); border-radius: 6px; transition: width 0.4s; }
+.progress-label { font-size: 11px; color: #5555aa; margin-top: 4px; }
+.progress-reset { background: none; border: none; color: var(--text-faint); font-size: 10px; padding: 0; margin-top: 4px; text-decoration: underline; }
+.progress-reset:hover { color: var(--text-active); }
+
+.module-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; padding: 6px 6px 3px; font-weight: 600; }
+.topic-btn {
+  width: 100%; background: transparent; border: 1px solid transparent; border-radius: 7px; padding: 7px 10px;
+  color: var(--text-muted); text-align: left; font-size: 12.5px; transition: all 0.15s; display: flex; align-items: center; gap: 6px;
+}
+.topic-btn:hover { color: var(--text-active); }
+.topic-btn.active { background: var(--active); border-color: var(--active-border); color: var(--text-active); }
+.topic-status { font-size: 10px; }
+
+/* ---------- Main ---------- */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.topbar {
+  padding: 12px 24px; border-bottom: 1px solid var(--border); background: #0d0d14;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.topbar-title { font-size: 14px; font-weight: 600; color: #d0d0e8; }
+.topbar-sub { font-size: 11px; color: #33334a; }
+.tabs { display: flex; gap: 8px; }
+.tab {
+  background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; padding: 5px 14px;
+  color: #555577; font-size: 12px;
+}
+.tab.active { background: var(--active); border-color: var(--active-border); color: var(--text-active); }
+.content { flex: 1; overflow: auto; padding: 20px 28px; }
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%; }
+.column { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; overflow-y: auto; }
+.lesson-text, .code-view {
+  font-family: var(--code-font); font-size: 12.5px; color: var(--text-soft); white-space: pre-wrap; margin: 0;
+}
+.lesson-text { line-height: 1.85; }
+.code-view { line-height: 1.75; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border: none;
+  border-radius: 10px; padding: 10px 20px; font-weight: 600; font-size: 13px;
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-secondary {
+  background: #1a1a2e; color: #8888cc; border: 1px solid #2a2a44; border-radius: 8px; padding: 7px 14px; font-size: 12px;
+}
+
+/* ---------- Code editor ---------- */
+.editor {
+  position: relative; flex: 1; min-height: 300px; background: var(--editor); border: 1px solid var(--border-strong);
+  border-radius: 10px; overflow: hidden;
+}
+.editor-layer, .editor-input {
+  position: absolute; inset: 0; margin: 0; padding: 14px 16px; font-family: var(--code-font); font-size: 12.5px;
+  line-height: 1.75; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; tab-size: 2;
+}
+.editor-layer { pointer-events: none; color: var(--text-soft); overflow: hidden; }
+.editor-input {
+  width: 100%; height: 100%; background: transparent; border: none; outline: none; color: transparent;
+  caret-color: #fff; resize: none; overflow-y: auto;
+}
+.editor-input::selection { background: rgba(124, 58, 237, 0.35); }
+
+/* ---------- Simulation output ---------- */
+.sim { margin-top: 16px; border-radius: 10px; padding: 14px 18px; font-family: ui-monospace, monospace; font-size: 12px; }
+.sim-error { background: #1a0a0a; border: 1px solid #550000; color: #ff6b6b; font-size: 13px; white-space: pre-wrap; }
+.sim-result { background: #0a0f0a; color: #c8e6c9; }
+.sim-head { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+.sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; margin-bottom: 10px; }
+.sim-key { color: #888; }
+.sim-val { color: #69f0ae; }
+.sim-section { border-top: 1px solid #1a3a1a; padding-top: 8px; margin-bottom: 8px; }
+.sim-section-title { color: #aed581; margin-bottom: 4px; }
+.sim-timing { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 4px; }
+.sim-endpoints { border-top: 1px solid #1a3a1a; padding-top: 8px; color: #666; font-size: 11px; word-break: break-all; }
+.sim-note { color: #666; font-size: 11px; margin-top: 6px; }
+.placeholder { color: #33334a; font-size: 13px; margin-top: 20px; }
+
+/* ---------- Challenges ---------- */
+.challenge-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.challenge-btn {
+  background: transparent; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px;
+  color: var(--text-muted); text-align: left; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.challenge-btn.active { background: #1a1a2e; border-color: var(--active-border); color: var(--text-active); }
+.challenge-btn .difficulty { margin-left: auto; font-size: 11px; }
+.challenge-title { font-size: 14px; font-weight: 600; color: var(--text-active); margin-bottom: 8px; }
+.challenge-desc { font-size: 13px; color: #8888aa; line-height: 1.7; margin-bottom: 14px; }
+.hints { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.hint {
+  background: #0a0a20; border: 1px solid #2a2a40; border-radius: 8px; padding: 8px 12px; font-size: 12px;
+  color: #8888cc; font-family: ui-monospace, monospace; white-space: pre-wrap;
+}
+.challenge-actions { display: flex; gap: 8px; }
+.challenge-actions .btn-primary { flex: 1; border-radius: 8px; padding: 7px 16px; font-size: 12px; }
+.feedback { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+.feedback.success { background: #0a1a0a; border: 1px solid #1a4a1a; color: #69f0ae; }
+.feedback.fail { background: #1a0a0a; border: 1px solid #4a1a1a; color: #ff6b6b; }
+.empty { color: var(--text-faint); text-align: center; margin-top: 60px; }
+
+/* ---------- Telas estreitas ---------- */
+@media (max-width: 900px) {
+  .app { flex-direction: column; height: auto; min-height: 100vh; overflow: visible; }
+  .sidebar { width: 100%; max-height: 40vh; border-right: none; border-bottom: 1px solid var(--border-strong); }
+  .main { overflow: visible; }
+  .content { padding: 16px; overflow: visible; }
+  .two-cols { grid-template-columns: 1fr; height: auto; }
+  .editor { min-height: 360px; }
+}

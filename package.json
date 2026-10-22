@@ -1,0 +1,29 @@
+{
+  "name": "professor-k6",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Plataforma de estudo de testes de performance com k6: lições, editor com simulação e desafios.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Carlos Douglas Santos da Silva",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "api": "node server/index.js"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.4",
+    "express": "4.21.2",
+    "vite": "5.4.11",
+    "vitest": "2.1.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
