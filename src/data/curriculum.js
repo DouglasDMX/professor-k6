@@ -127,7 +127,7 @@ export default function () {
   const payload = JSON.stringify({
     pedido_id: 8550,
     status: 'LIBERADO',
-    operador: 'carlos.douglas'
+    operador: 'operador01'
   });
   http.post('http://localhost:3000/pedidos/status', payload, {
     headers: { 'Content-Type': 'application/json' }
